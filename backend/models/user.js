@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const validator = require("validator");
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -7,28 +8,33 @@ const userSchema = new mongoose.Schema({
     maxlength: 30,
     required: true,
   },
+
   about: {
     type: String,
     minlength: 2,
     maxlength: 30,
     required: true,
   },
+
   avatar: {
     type: String,
     required: true,
     validate: {
-      validator: (v) => {
-        return /(http|https):\/\/(www\.)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*$/.test(
-          v
-        );
-      },
+      validator: (value) => validator.isURL(value),
+      message: "La URL no es válida",
     },
   },
+
   email: {
     type: String,
     required: true,
     unique: true,
+    validate: {
+      validator: (value) => validator.isEmail(value),
+      message: "El email no es válido",
+    },
   },
+
   password: {
     type: String,
     required: true,
