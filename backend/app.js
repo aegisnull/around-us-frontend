@@ -35,3 +35,7 @@ app.use("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
+
+const { login, createUser } = require("../controllers/users");
+app.post("/signin", login);
+app.post("/signup", createUser);
