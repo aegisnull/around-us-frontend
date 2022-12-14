@@ -1,5 +1,10 @@
 const express = require("express");
 const moongose = require("mongoose");
+var cors = require("cors");
+
+// inclúyelos antes de otras rutas
+app.use(cors());
+app.options("*", cors()); //habilitar las solicitudes de todas las rutas
 
 const { PORT = 3000 } = process.env;
 const app = express();
