@@ -1,0 +1,32 @@
+@import url(./__close-button/modal__close-button.css);
+@import url(./__container/modal__container.css);
+@import url(./__error/modal__error.css);
+@import url(./__form-submit/modal__form-submit.css);
+@import url(./__form/modal__form.css);
+@import url(./__input/modal__input.css);
+@import url(./__profile-name/modal__profile-name.css);
+@import url(./__profile-title/modal__profile-title.css);
+@import url(./__title/modal__title.css);
+@import url(./__tooltip-image/modal__tooltip-image.css);
+@import url(./__tooltip-text/modal__tooltip-text.css);
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: visibility 1s, opacity 1s linear;
+}
+
+.modal_active {
+  visibility: visible;
+  opacity: 1;
+}

@@ -1,0 +1,22 @@
+.modal__title {
+  color: black;
+  font-family: "Inter";
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 29px;
+  margin: 34px 0 0 36px;
+}
+
+.modal__title.modal__title_delete {
+  margin: 34px 0px 24px 0px;
+}
+
+@media screen and (max-width: 520px) {
+  .modal__title {
+    font-size: 18px;
+    line-height: 22px;
+    margin-left: 22px;
+    margin-top: 25px;
+    text-align: left;
+  }
+}

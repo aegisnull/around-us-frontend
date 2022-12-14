@@ -1,0 +1,16 @@
+.modal__form {
+  align-self: center;
+  padding-top: 54px;
+  width: 83%;
+}
+
+.modal__form.modal__form_delete {
+  padding-top: 0px;
+}
+
+@media screen and (max-width: 520px) {
+  .modal__form {
+    padding-top: 75px;
+    max-width: 238px;
+  }
+}

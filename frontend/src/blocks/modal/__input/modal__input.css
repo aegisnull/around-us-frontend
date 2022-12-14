@@ -1,0 +1,22 @@
+@import url(./_has-error/modal__input_has-error.css);
+
+.modal__input {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  color: #000;
+  font-family: "Inter";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  margin-bottom: 0px;
+  outline-color: rgba(85, 0, 85, 0.5);
+  width: 100%;
+  padding-bottom: 13px;
+}
+.modal__input:focus {
+  outline: none;
+}
+
+.modal__input:last-of-type {
+  margin-top: 30px;
+}

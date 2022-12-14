@@ -1,0 +1,20 @@
+.profile__post-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 50px;
+  border: solid 2px #fff;
+  background: transparent;
+}
+
+.profile__post-button:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 460px) {
+  .profile__post-button {
+    width: 90vw;
+  }
+}

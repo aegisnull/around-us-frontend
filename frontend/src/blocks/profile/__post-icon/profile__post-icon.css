@@ -1,0 +1,11 @@
+.profile__post-icon {
+  width: 22px;
+  height: 22px;
+}
+
+@media screen and (max-width: 460px) {
+  .profile__post-icon {
+    width: 16px;
+    height: 16px;
+  }
+}

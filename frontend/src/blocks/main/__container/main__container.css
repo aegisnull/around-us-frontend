@@ -1,0 +1,10 @@
+.main__container {
+  max-width: 880px;
+  margin: auto;
+}
+
+@media screen and (max-width: 940px) {
+  .main__container {
+    max-width: 90vw;
+  }
+}
