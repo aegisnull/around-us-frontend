@@ -94,7 +94,7 @@ module.exports.login = (req, res, next) => {
       res.send({ token });
     })
     .catch((err) => {
-      res.status(500).send({ message: `Usuario o contraseña incorrectos` });
+      res.status(401).send({ message: `Usuario o contraseña incorrectos` });
     })
     .catch(next);
 };
