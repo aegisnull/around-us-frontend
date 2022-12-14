@@ -8,14 +8,6 @@ app.use(express.json());
 //urlencoded() method within express. This method is called as a middleware in your application using the code: app.use(express.urlencoded());
 app.use(express.urlencoded({ extended: true }));
 
-app.use((req, res, next) => {
-  req.user = {
-    _id: "6365a4f7bd579f1842394cc2", // pega el _id del usuario de prueba que creamos en el paso anterior
-  };
-
-  next();
-});
-
 moongose
   .connect("mongodb://localhost:27017/aroundb")
   .then(() => console.log("Conectado a la base de datos"))
