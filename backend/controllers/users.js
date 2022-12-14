@@ -38,13 +38,14 @@ module.exports.createUser = (req, res) => {
         });
       })
       .catch((err) => {
-      if (err.name === "ValidationError") {
-        res.status(400);
-      } else {
-        res.status(500);
-      }
-      res.status(500).send({ message: `Algo salió mal` });
-    });
+        if (err.name === "ValidationError") {
+          res.status(400);
+        } else {
+          res.status(500);
+        }
+        res.status(500).send({ message: `Algo salió mal` });
+      });
+  });
 };
 
 module.exports.updateProfile = (req, res) => {
@@ -77,4 +78,23 @@ module.exports.updateAvatar = (req, res) => {
       }
       res.status(500).send({ message: `Algo salió mal` });
     });
+};
+
+module.exports.login = (req, res, next) => {
+  const { email, password } = req.body;
+  return User.findUserByCredentials(email, password)
+    .then((user) => {
+      const token = jwt.sign(
+        { _id: user._id },
+        NODE_ENV === "production" ? JWT_SECRET : "5d8b8592978f8bd833ca8133",
+        {
+          expiresIn: "7d",
+        }
+      );
+      res.send({ token });
+    })
+    .catch((err) => {
+      res.status(500).send({ message: `Usuario o contraseña incorrectos` });
+    })
+    .catch(next);
 };
