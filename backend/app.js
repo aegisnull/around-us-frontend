@@ -33,6 +33,12 @@ app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
 
+app.get("/crash-test", () => {
+  setTimeout(() => {
+    throw new Error("El servidor va a caer");
+  }, 0);
+});
+
 const { login, createUser } = require("./controllers/users");
 app.post("/signin", login);
 app.post("/signup", createUser);
