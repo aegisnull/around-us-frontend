@@ -26,7 +26,7 @@ function App() {
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
-  const [userEmail, setUserEmail] = useState("");
+  const [userEmail, setEmail] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
 
   const history = useNavigate();
@@ -84,7 +84,7 @@ function App() {
         .validateToken(jwt)
         .then((res) => {
           if (res) {
-            setUserEmail(res.data.email);
+            setEmail(res.data.email);
             setIsLoggedIn(true);
             history("/");
           }
@@ -93,6 +93,7 @@ function App() {
           console.log(err);
         });
     }
+    // eslint-disable-next-line
   }, []);
 
   function handleCardLike(card) {
@@ -197,7 +198,7 @@ function App() {
       .then((user) => {
         localStorage.setItem("jwt", user.token);
         setIsLoggedIn(true);
-        setUserEmail(userData.email);
+        setEmail(userData.email);
         history("/");
       })
       .catch((err) => {

@@ -20,6 +20,9 @@ export class Api {
       .then(this._checkResponse)
       .then((data) => {
         return data;
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }
 
@@ -32,6 +35,9 @@ export class Api {
       .then(this._checkResponse)
       .then((data) => {
         return data;
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }
 
@@ -43,6 +49,9 @@ export class Api {
       .then(this._checkResponse)
       .then((data) => {
         return data;
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }
 
@@ -54,6 +63,9 @@ export class Api {
       .then(this._checkResponse)
       .then((data) => {
         return data;
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }
 
@@ -70,6 +82,9 @@ export class Api {
       .then(this._checkResponse)
       .then((data) => {
         return data;
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }
 
@@ -85,6 +100,9 @@ export class Api {
       .then(this._checkResponse)
       .then((data) => {
         return data;
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }
 
@@ -101,6 +119,9 @@ export class Api {
       .then(this._checkResponse)
       .then((data) => {
         return data;
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }
 }

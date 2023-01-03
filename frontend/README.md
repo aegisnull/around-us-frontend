@@ -1,8 +1,37 @@
-Around the U.S. project on React, featuring authorization and registration.
+# Around the U.S. React
 
-This repository will contain your own front-end project on React with added authorization and registration features.
-Start working with your previously built front end code from Sprint 11.
+Este proyecto es una aplicación web construida con React que permite a los usuarios agregar y eliminar imágenes, así como dar "me gusta" a las imágenes de otros usuarios. El proyecto fue desarrollado como parte del curso de Desarrollo Web de [Practicum](https://practicum.com/).
 
-All authorization, registration and token requests must go through to the server running on [https://register.nomoreparties.co](https://register.nomoreparties.co/).
+Toda la autorización, registro y solicitudes de token son redireccionadas al servidor que se ejecuta en [https://register.nomoreparties.co](https://register.nomoreparties.co/).
 
-Good luck!
+## Tecnologías
+
+- React
+- JavaScript
+- HTML
+- CSS
+- Webpack
+- Babel
+- API
+
+## Funcionalidades
+
+- Registro y autorización de usuarios.
+- Edición de perfil.
+- Agregar y eliminar imágenes.
+- Dar "me gusta" a las imágenes de otros usuarios.
+
+## Instalación
+
+1. Clona o descarga el repositorio.
+2. Ejecuta `npm install` para instalar las dependencias necesarias.
+3. Ejecuta `npm run start` para iniciar el servidor de desarrollo.
+4. El proyecto estará ejecutándose en http://localhost:3000/.
+
+## Despliegue
+
+El proyecto está desplegado en [GitHub Pages](https://aegisnull.github.io/react-around-auth_es/).
+
+## Autor
+
+- [AegisNull](https://github.com/aegisnull)

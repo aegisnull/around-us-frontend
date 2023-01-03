@@ -9,7 +9,11 @@ class Auth extends Api {
         email: user.email,
         password: user.password,
       }),
-    }).then(this._checkResponse);
+    })
+      .then(this._checkResponse)
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   authenticate(user) {
@@ -20,14 +24,22 @@ class Auth extends Api {
         email: user.email,
         password: user.password,
       }),
-    }).then(this._checkResponse);
+    })
+      .then(this._checkResponse)
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   validateToken(token) {
     return fetch(this._baseUrl + "/users/me", {
       headers: { ...this._headers, Authorization: "Bearer " + token },
       method: "GET",
-    }).then(this._checkResponse);
+    })
+      .then(this._checkResponse)
+      .catch((error) => {
+        console.error(error);
+      });
   }
 }
 
