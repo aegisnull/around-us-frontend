@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Login(props) {
   const [inputs, setInputs] = React.useState({});
@@ -33,7 +33,7 @@ function Login(props) {
           name="email"
           placeholder="Email"
           minLength="2"
-          value={inputs.email || ""}
+          value={inputs.email || ''}
           onChange={handleInputChange}
           required
         />
@@ -42,7 +42,7 @@ function Login(props) {
           type="password"
           name="password"
           placeholder="Password"
-          value={inputs.password || ""}
+          value={inputs.password || ''}
           onChange={handleInputChange}
           required
         />

@@ -1,20 +1,20 @@
-import Header from "./Header";
-import Main from "./Main";
-import Footer from "./Footer";
-import EditProfilePopup from "./EditProfilePopup";
-import AddPlacePopup from "./AddPlacePopup";
-import EditAvatarPopup from "./EditAvatarPopup";
-import { React, useEffect, useState } from "react";
-import ImagePopup from "./ImagePopup";
-import api from "../utils/api";
-import { auth } from "../utils/auth";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import { CardsContext } from "../contexts/CardsContext";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import Login from "./Login";
-import Register from "./Register";
-import ProtectedRoute from "./ProtectedRoute";
-import InfoTooltip from "./InfoTooltip";
+import { React, useEffect, useState } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import Header from './Header';
+import Main from './Main';
+import Footer from './Footer';
+import EditProfilePopup from './EditProfilePopup';
+import AddPlacePopup from './AddPlacePopup';
+import EditAvatarPopup from './EditAvatarPopup';
+import ImagePopup from './ImagePopup';
+import api from '../utils/api';
+import auth from '../utils/auth';
+import CurrentUserContext from '../contexts/CurrentUserContext';
+import CardsContext from '../contexts/CardsContext';
+import Login from './Login';
+import Register from './Register';
+import ProtectedRoute from './ProtectedRoute';
+import InfoTooltip from './InfoTooltip';
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -26,75 +26,10 @@ function App() {
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
-  const [userEmail, setEmail] = useState("");
+  const [userEmail, setEmail] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
 
   const history = useNavigate();
-
-  useEffect(() => {
-    api
-      .getInitialCards()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((err) => {
-        console.log("Error. La solicitud ha fallado");
-      });
-  }, []);
-
-  useEffect(() => {
-    api
-      .getUserInfo()
-      .then((res) => {
-        setCurrentUser(res);
-      })
-      .catch((err) => {
-        console.log("Error. La solicitud ha fallado");
-      });
-  }, []);
-
-  useEffect(() => {
-    const closeByEscape = (e) => {
-      if (e.key === "Escape") {
-        closeAllPopups();
-      }
-    };
-
-    document.addEventListener("keydown", closeByEscape);
-
-    return () => document.removeEventListener("keydown", closeByEscape);
-  }, []);
-
-  useEffect(() => {
-    const closeByClick = (e) => {
-      if (e.target.classList.contains("modal_active")) {
-        closeAllPopups();
-      }
-    };
-
-    document.addEventListener("click", closeByClick);
-
-    return () => document.removeEventListener("click", closeByClick);
-  }, []);
-
-  useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      auth
-        .validateToken(jwt)
-        .then((res) => {
-          if (res) {
-            setEmail(res.data.email);
-            setIsLoggedIn(true);
-            history("/");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-    // eslint-disable-next-line
-  }, []);
 
   function handleCardLike(card) {
     // Verifica una vez más si a esta tarjeta ya le han dado like
@@ -104,9 +39,7 @@ function App() {
     api
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
-        setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
-        );
+        setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
       })
       .catch((err) => {
         console.log(err);
@@ -157,8 +90,8 @@ function App() {
         setCurrentUser(res);
         closeAllPopups();
       })
-      .catch((err) => {
-        console.log("Error. La solicitud ha fallado");
+      .catch(() => {
+        console.log('Error. La solicitud ha fallado');
       });
   }
 
@@ -169,8 +102,8 @@ function App() {
         setCurrentUser(res);
         closeAllPopups();
       })
-      .catch((err) => {
-        console.log("Error. La solicitud ha fallado");
+      .catch(() => {
+        console.log('Error. La solicitud ha fallado');
       });
   }
 
@@ -181,25 +114,25 @@ function App() {
         setCards([newCard, ...cards]);
         closeAllPopups();
       })
-      .catch((err) => {
-        console.log("Error. La solicitud ha fallado");
+      .catch(() => {
+        console.log('Error. La solicitud ha fallado');
       });
   }
 
   function handleLogout() {
-    localStorage.removeItem("jwt");
+    localStorage.removeItem('jwt');
     setIsLoggedIn(false);
-    history("/login");
+    history('/login');
   }
 
   function handleLogin(userData) {
     auth
       .authenticate(userData)
       .then((user) => {
-        localStorage.setItem("jwt", user.token);
+        localStorage.setItem('jwt', user.token);
         setIsLoggedIn(true);
         setEmail(userData.email);
-        history("/");
+        history('/');
       })
       .catch((err) => {
         setIsSuccess(false);
@@ -214,7 +147,7 @@ function App() {
       .then((user) => {
         if (user.data._id) {
           setIsSuccess(true);
-          history("signin");
+          history('signin');
         } else {
           setIsSuccess(false);
         }
@@ -227,14 +160,75 @@ function App() {
       });
   }
 
+  useEffect(() => {
+    api
+      .getInitialCards()
+      .then((data) => {
+        setCards(data);
+      })
+      .catch(() => {
+        console.log('Error. La solicitud ha fallado');
+      });
+  }, []);
+
+  useEffect(() => {
+    api
+      .getUserInfo()
+      .then((res) => {
+        setCurrentUser(res);
+      })
+      .catch(() => {
+        console.log('Error. La solicitud ha fallado');
+      });
+  }, []);
+
+  useEffect(() => {
+    const closeByEscape = (e) => {
+      if (e.key === 'Escape') {
+        closeAllPopups();
+      }
+    };
+
+    document.addEventListener('keydown', closeByEscape);
+
+    return () => document.removeEventListener('keydown', closeByEscape);
+  }, []);
+
+  useEffect(() => {
+    const closeByClick = (e) => {
+      if (e.target.classList.contains('modal_active')) {
+        closeAllPopups();
+      }
+    };
+
+    document.addEventListener('click', closeByClick);
+
+    return () => document.removeEventListener('click', closeByClick);
+  }, []);
+
+  useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      auth
+        .validateToken(jwt)
+        .then((res) => {
+          if (res) {
+            setEmail(res.data.email);
+            setIsLoggedIn(true);
+            history('/');
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <div className="page__content">
       <CurrentUserContext.Provider value={currentUser}>
-        <Header
-          isLoggedIn={isLoggedIn}
-          userEmail={userEmail}
-          handleLogout={handleLogout}
-        />
+        <Header isLoggedIn={isLoggedIn} userEmail={userEmail} handleLogout={handleLogout} />
         <CardsContext.Provider value={cards}>
           <Routes>
             <Route
@@ -250,26 +244,17 @@ function App() {
                     onCardDelete={handleCardDelete}
                   />
                 </ProtectedRoute>
-              }
-            ></Route>
+              }></Route>
             <Route
               path="/signin"
-              element={<Login isLoggedIn={isLoggedIn} onSubmit={handleLogin} />}
-            ></Route>
+              element={<Login isLoggedIn={isLoggedIn} onSubmit={handleLogin} />}></Route>
             <Route
               path="/signup"
-              element={
-                <Register isSuccess={isSuccess} onSubmit={handleSignup} />
-              }
-            ></Route>
+              element={<Register isSuccess={isSuccess} onSubmit={handleSignup} />}></Route>
           </Routes>
         </CardsContext.Provider>
         <Footer />
-        <ImagePopup
-          isOpen={isImagePopupOpen}
-          onClose={closeAllPopups}
-          card={selectedCard}
-        />
+        <ImagePopup isOpen={isImagePopupOpen} onClose={closeAllPopups} card={selectedCard} />
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
@@ -285,12 +270,7 @@ function App() {
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
         />
-        <InfoTooltip
-          isOpen={isInfoTooltipOpen}
-          onClose={closeAllPopups}
-          isSuccess={isSuccess}
-        />
-        ;
+        <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} isSuccess={isSuccess} />;
       </CurrentUserContext.Provider>
     </div>
   );

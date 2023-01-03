@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Register(props) {
   const [inputs, setInputs] = React.useState({});
@@ -32,7 +32,7 @@ function Register(props) {
           type="email"
           name="email"
           placeholder="Email"
-          value={inputs.email || ""}
+          value={inputs.email || ''}
           onChange={handleInputChange}
           required
         />
@@ -41,7 +41,7 @@ function Register(props) {
           type="password"
           name="password"
           placeholder="Password"
-          value={inputs.password || ""}
+          value={inputs.password || ''}
           onChange={handleInputChange}
           required
         />

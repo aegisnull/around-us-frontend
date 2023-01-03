@@ -43,7 +43,9 @@ class Auth extends Api {
   }
 }
 
-export const auth = new Auth({
+const auth = new Auth({
   baseUrl: 'https://register.nomoreparties.co',
   headers: { 'Content-Type': 'application/json' },
 });
+
+export default auth;

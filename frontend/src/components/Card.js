@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { useContext } from 'react';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
 function Card({ cardData, onCardClick, onCardLike, onCardDelete }) {
   const currentUser = useContext(CurrentUserContext);
@@ -8,7 +8,7 @@ function Card({ cardData, onCardClick, onCardLike, onCardDelete }) {
 
   // Creando una variable que después establecerás en `className` para el botón eliminar
   const cardDeleteButtonClassName = `card__remove-button ${
-    isOwn ? "card__remove-button_active" : "card__remove-button"
+    isOwn ? 'card__remove-button_active' : 'card__remove-button'
   }`;
 
   // Verifica si el usuario actual le dio "like" a la tarjeta
@@ -16,7 +16,7 @@ function Card({ cardData, onCardClick, onCardLike, onCardDelete }) {
 
   // Crea una variable que después establecerás en `className` para el botón like
   const cardLikeButtonClassName = `card__like-button ${
-    isLiked ? "card__like-button_active" : "card__like-button"
+    isLiked ? 'card__like-button_active' : 'card__like-button'
   }`;
 
   function handleClick() {
@@ -33,23 +33,12 @@ function Card({ cardData, onCardClick, onCardLike, onCardDelete }) {
 
   return (
     <div className="card">
-      <button
-        className={cardDeleteButtonClassName}
-        onClick={handleDeleteClick}
-      />
-      <img
-        className="card__img"
-        src={cardData.link}
-        alt={cardData.name}
-        onClick={handleClick}
-      />
+      <button className={cardDeleteButtonClassName} onClick={handleDeleteClick} />
+      <img className="card__img" src={cardData.link} alt={cardData.name} onClick={handleClick} />
       <div className="card__text-container">
         <h2 className="card__title">{cardData.name}</h2>
         <div className="card__like-container">
-          <button
-            className={cardLikeButtonClassName}
-            onClick={handleLikeClick}
-          />
+          <button className={cardLikeButtonClassName} onClick={handleLikeClick} />
           <span className="card__like-counter">{cardData.likes.length}</span>
         </div>
       </div>

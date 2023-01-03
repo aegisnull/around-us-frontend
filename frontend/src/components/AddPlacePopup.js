@@ -1,9 +1,9 @@
-import PopupWithForm from "./PopupWithForm";
-import React from "react";
+import React from 'react';
+import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup({ isOpen, onClose, onAddPlaceSubmit }) {
-  const [pictureName, setPictureName] = React.useState("");
-  const [pictureLink, setPictureLink] = React.useState("");
+  const [pictureName, setPictureName] = React.useState('');
+  const [pictureLink, setPictureLink] = React.useState('');
 
   function handlePictureNameChange(e) {
     setPictureName(e.target.value);
@@ -22,8 +22,8 @@ function AddPlacePopup({ isOpen, onClose, onAddPlaceSubmit }) {
   }
 
   React.useEffect(() => {
-    setPictureName("");
-    setPictureLink("");
+    setPictureName('');
+    setPictureLink('');
   }, [isOpen]);
 
   return (
@@ -35,8 +35,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlaceSubmit }) {
       onClose={onClose}
       formSubmitText="Crear"
       formSubmitClass="form-create"
-      onSubmit={handleSubmit}
-    >
+      onSubmit={handleSubmit}>
       <input
         className="modal__input modal__profile-cardtitle"
         id="new-place-title"
@@ -44,7 +43,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlaceSubmit }) {
         placeholder="Título"
         minLength="2"
         maxLength="30"
-        value={pictureName || ""}
+        value={pictureName || ''}
         onChange={handlePictureNameChange}
         required
       />
@@ -56,7 +55,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlaceSubmit }) {
         id="new-place-url"
         type="url"
         placeholder="Enlace a la imágen"
-        value={pictureLink || ""}
+        value={pictureLink || ''}
         onChange={handlePictureLinkChange}
         required
       />

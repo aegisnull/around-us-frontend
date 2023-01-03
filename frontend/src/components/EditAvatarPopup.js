@@ -1,5 +1,5 @@
-import PopupWithForm from "./PopupWithForm";
-import React from "react";
+import React from 'react';
+import PopupWithForm from './PopupWithForm';
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
   const avatarRef = React.useRef();
@@ -11,7 +11,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
   }
 
   React.useEffect(() => {
-    avatarRef.current.value = "";
+    avatarRef.current.value = '';
   }, [isOpen]);
 
   return (
@@ -23,8 +23,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
       onClose={onClose}
       formSubmitText="Guardar"
       formSubmitClass="form-profile"
-      onSubmit={handleSubmit}
-    >
+      onSubmit={handleSubmit}>
       <input
         className="modal__input modal__profile-url"
         id="new-profile-url"

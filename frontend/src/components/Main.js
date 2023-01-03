@@ -1,9 +1,9 @@
-import edit from "../images/edit.svg";
-import post from "../images/post.svg";
-import React from "react";
-import Card from "./Card";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import { CardsContext } from "../contexts/CardsContext";
+import React from 'react';
+import edit from '../images/edit.svg';
+import post from '../images/post.svg';
+import Card from './Card';
+import CurrentUserContext from '../contexts/CurrentUserContext';
+import CardsContext from '../contexts/CardsContext';
 
 function Main({
   onEditProfileClick,
@@ -21,30 +21,16 @@ function Main({
     <main className="main__container">
       <section className="profile">
         <div className="profile__container-left">
-          <img
-            className="profile__img"
-            src={currentUser.avatar}
-            alt="Profile avatar"
-          />
+          <img className="profile__img" src={currentUser.avatar} alt="Profile avatar" />
           <div className="profile__overlay">
-            <span
-              onClick={onEditAvatarClick}
-              className="profile__img-button"
-            ></span>
+            <span onClick={onEditAvatarClick} className="profile__img-button"></span>
           </div>
         </div>
         <div className="profile__container-middle">
           <div className="profile__subcontainer-top">
             <h1 className="profile__name">{currentUser.name}</h1>
-            <button
-              className="profile__edit-button"
-              onClick={onEditProfileClick}
-            >
-              <img
-                className="profile__edit-icon"
-                src={edit}
-                alt="edit button"
-              />
+            <button className="profile__edit-button" onClick={onEditProfileClick}>
+              <img className="profile__edit-icon" src={edit} alt="edit button" />
             </button>
           </div>
           <div className="profile__subcontainer-bottom">
