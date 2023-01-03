@@ -1,5 +1,5 @@
-const User = require("../models/user");
-const bcrypt = require("bcryptjs");
+const User = require('../models/user');
+const bcrypt = require('bcryptjs');
 
 module.exports.getUsers = (req, res) =>
   User.find({})
@@ -9,13 +9,13 @@ module.exports.getUsers = (req, res) =>
 module.exports.getUserById = (req, res) =>
   User.findById(req.params.id)
     .orFail(() => {
-      const error = new Error("Ningún usuario encontrado con ese id");
+      const error = new Error('Ningún usuario encontrado con ese id');
       error.statusCode = 404;
       throw error;
     })
     .then((user) => res.send({ data: user }))
     .catch((err) => {
-      if (err.name === "CastError") {
+      if (err.name === 'CastError') {
         res.status(400);
       } else {
         res.status(500);
@@ -30,15 +30,15 @@ module.exports.createUser = (req, res) => {
       about: req.body.about,
       avatar: req.body.avatar,
       email: req.body.email,
-      password: hash,
+      password: hash
     })
       .then((user) => {
         res.send({
-          data: user,
+          data: user
         });
       })
       .catch((err) => {
-        if (err.name === "ValidationError") {
+        if (err.name === 'ValidationError') {
           res.status(400);
         } else {
           res.status(500);
@@ -55,7 +55,7 @@ module.exports.updateProfile = (req, res) => {
   User.findByIdAndUpdate(req.user._id, { name, about }, opts)
     .then((user) => res.send({ data: user }))
     .catch((err) => {
-      if (err.name === "ValidationError") {
+      if (err.name === 'ValidationError') {
         res.status(400);
       } else {
         res.status(500);
@@ -71,7 +71,7 @@ module.exports.updateAvatar = (req, res) => {
   User.findByIdAndUpdate(req.user._id, { avatar }, opts)
     .then((user) => res.send({ data: user }))
     .catch((err) => {
-      if (err.name === "ValidationError") {
+      if (err.name === 'ValidationError') {
         res.status(400);
       } else {
         res.status(500);
@@ -86,9 +86,9 @@ module.exports.login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        NODE_ENV === "production" ? JWT_SECRET : "5d8b8592978f8bd833ca8133",
+        NODE_ENV === 'production' ? JWT_SECRET : '5d8b8592978f8bd833ca8133',
         {
-          expiresIn: "7d",
+          expiresIn: '7d'
         }
       );
       res.send({ token });
