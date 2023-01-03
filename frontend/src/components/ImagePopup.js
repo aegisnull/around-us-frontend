@@ -1,3 +1,5 @@
+import React from 'react';
+
 function ImagePopup({ isOpen, card, onClose }) {
   return (
     <div id="lightbox" className={`popup ${isOpen ? 'active' : ''}`}>
