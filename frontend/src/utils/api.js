@@ -11,31 +11,27 @@ export class Api {
     return Promise.reject(`Error ${res.status}`);
   }
 
-  //GET https://around.nomoreparties.co/v1/groupId/users/me
+  // GET https://around.nomoreparties.co/v1/groupId/users/me
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
-      method: "GET",
+      method: 'GET',
       headers: this._headers,
     })
       .then(this._checkResponse)
-      .then((data) => {
-        return data;
-      })
+      .then((data) => data)
       .catch((error) => {
         console.error(error);
       });
   }
 
-  //GET https://around.nomoreparties.co/v1/groupId/cards
+  // GET https://around.nomoreparties.co/v1/groupId/cards
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
-      method: "GET",
+      method: 'GET',
       headers: this._headers,
     })
       .then(this._checkResponse)
-      .then((data) => {
-        return data;
-      })
+      .then((data) => data)
       .catch((error) => {
         console.error(error);
       });
@@ -43,13 +39,11 @@ export class Api {
 
   changeLikeCardStatus(cardId, isLiked) {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-      method: isLiked ? "PUT" : "DELETE",
+      method: isLiked ? 'PUT' : 'DELETE',
       headers: this._headers,
     })
       .then(this._checkResponse)
-      .then((data) => {
-        return data;
-      })
+      .then((data) => data)
       .catch((error) => {
         console.error(error);
       });
@@ -57,69 +51,61 @@ export class Api {
 
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: this._headers,
     })
       .then(this._checkResponse)
-      .then((data) => {
-        return data;
-      })
+      .then((data) => data)
       .catch((error) => {
         console.error(error);
       });
   }
 
-  //PATCH https://around.nomoreparties.co/v1/groupId/users/me
+  // PATCH https://around.nomoreparties.co/v1/groupId/users/me
   setUserInfo({ name, about }) {
     return fetch(`${this._baseUrl}/users/me`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        name: name,
-        about: about,
+        name,
+        about,
       }),
     })
       .then(this._checkResponse)
-      .then((data) => {
-        return data;
-      })
+      .then((data) => data)
       .catch((error) => {
         console.error(error);
       });
   }
 
-  //PATCH https://around.nomoreparties.co/v1/groupId/users/me/avatar
+  // PATCH https://around.nomoreparties.co/v1/groupId/users/me/avatar
   setUserAvatar({ avatar }) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: avatar,
+        avatar,
       }),
     })
       .then(this._checkResponse)
-      .then((data) => {
-        return data;
-      })
+      .then((data) => data)
       .catch((error) => {
         console.error(error);
       });
   }
 
-  //POST https://around.nomoreparties.co/v1/groupId/cards
+  // POST https://around.nomoreparties.co/v1/groupId/cards
   addCard({ name, link }) {
     return fetch(`${this._baseUrl}/cards`, {
-      method: "POST",
+      method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
-        name: name,
-        link: link,
+        name,
+        link,
       }),
     })
       .then(this._checkResponse)
-      .then((data) => {
-        return data;
-      })
+      .then((data) => data)
       .catch((error) => {
         console.error(error);
       });
@@ -127,10 +113,10 @@ export class Api {
 }
 
 const api = new Api({
-  baseUrl: "https://around.nomoreparties.co/v1/cohort-1-es",
+  baseUrl: 'https://around.nomoreparties.co/v1/cohort-1-es',
   headers: {
-    authorization: "e7cf5ec1-f874-45f0-bd41-d890ac5955db",
-    "Content-Type": "application/json",
+    authorization: 'e7cf5ec1-f874-45f0-bd41-d890ac5955db',
+    'Content-Type': 'application/json',
   },
 });
 
