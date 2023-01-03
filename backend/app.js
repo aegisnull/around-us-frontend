@@ -1,16 +1,17 @@
 const express = require('express');
 const moongose = require('mongoose');
-var cors = require('cors');
+const cors = require('cors');
+
+const { PORT = 3000 } = process.env;
+
+const app = express();
 
 // inclúyelos antes de otras rutas
 app.use(cors());
-app.options('*', cors()); //habilitar las solicitudes de todas las rutas
+app.options('*', cors()); // habilitar las solicitudes de todas las rutas
 
-const { PORT = 3000 } = process.env;
-const app = express();
-//express.json() is a method inbuilt in express to recognize the incoming Request Object as a JSON Object.
+// express.json() is a method to recognize the incoming Request Object as a JSON.
 app.use(express.json());
-//urlencoded() method within express. This method is called as a middleware in your application using the code: app.use(express.urlencoded());
 app.use(express.urlencoded({ extended: true }));
 
 moongose
@@ -40,5 +41,6 @@ app.get('/crash-test', () => {
 });
 
 const { login, createUser } = require('./controllers/users');
+
 app.post('/signin', login);
 app.post('/signup', createUser);
