@@ -1,6 +1,6 @@
 {
   "name": "around-react",
-  "homepage": "https://aegisnull.github.io/react-around-auth_es/",
+  "homepage": ".",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
@@ -19,9 +19,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -42,10 +40,6 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^8.31.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-react": "^7.31.11",
     "gh-pages": "^4.0.0"
   }
 }
