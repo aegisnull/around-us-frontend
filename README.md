@@ -9,5 +9,5 @@ This repository contains the full API of "Around the U.S." project that features
 
 ## Links to websites
 
-- [Around the U.S. Frontend](http://news-explorer.projects.luistellez.com)
-- [API](http://api.news-explorer.projects.luistellez.com)
+- [Around the U.S. Frontend](http://aroundus.projects.luistellez.com)
+- [API](http://api.aroundus.projects.luistellez.com)
