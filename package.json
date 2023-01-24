@@ -1,0 +1,12 @@
+{
+  "name": "React Around the U.S.",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "cd frontend && npm run serve"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {}
+}
