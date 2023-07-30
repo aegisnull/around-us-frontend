@@ -4,8 +4,7 @@
   "description": "Backend for Around the U.S. project, a social network for sharing images.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js",
+    "start": "nodemon app.js",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
     "lint:check": "eslint .",
