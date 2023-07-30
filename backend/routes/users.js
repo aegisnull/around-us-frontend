@@ -4,14 +4,15 @@ const {
   getUserById,
   createUser,
   updateProfile,
-  updateAvatar,
+  updateAvatar
 } = require('../controllers/users');
+const { auth } = require('../middlewares/auth');
 
-usersRouter.get('/', getUsers);
-usersRouter.get('/:id', getUserById);
+usersRouter.get('/', auth, getUsers);
+usersRouter.get('/:id', auth, getUserById);
 usersRouter.post('/', createUser);
-usersRouter.patch('/me', updateProfile);
-usersRouter.patch('/me/avatar', updateAvatar);
-usersRouter.get('/users/me', getUsers);
+usersRouter.patch('/me', auth, updateProfile);
+usersRouter.patch('/me/avatar', auth, updateAvatar);
+usersRouter.get('/users/me', auth, getUsers);
 
 module.exports = usersRouter;

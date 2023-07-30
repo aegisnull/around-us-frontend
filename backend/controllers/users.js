@@ -1,28 +1,28 @@
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
-module.exports.getUsers = (req, res) => User.find({})
-  .then((users) => res.send({ data: users }))
-  .catch(() => res.status(500).send({ message: 'Algo salió mal' }));
-
-module.exports.getUserById = (req, res) => User.findById(req.params.id)
-  .orFail(() => {
-    const error = new Error('Ningún usuario encontrado con ese id');
-    error.statusCode = 404;
-    throw error;
-  })
-  .then((user) => res.send({ data: user }))
-  .catch((err) => {
-    if (err.name === 'CastError') {
-      res.status(400);
-    } else {
-      res.status(500);
-    }
+module.exports.getUsers = async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.send({ users: users });
+  } catch (err) {
     res.status(500).send({ message: 'Algo salió mal' });
-  });
+  }
+};
+
+module.exports.getUserById = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).orFail();
+    res.send({ data: user });
+  } catch (err) {
+    res.status(404).send({
+      message: 'Ningún usuario encontrado con ese id'
+    });
+  }
+};
 
 module.exports.createUser = (req, res) => {
   bcrypt.hash(req.body.password, 10).then((hash) => {
@@ -31,11 +31,11 @@ module.exports.createUser = (req, res) => {
       about: req.body.about,
       avatar: req.body.avatar,
       email: req.body.email,
-      password: hash,
+      password: hash
     })
       .then((user) => {
         res.send({
-          data: user,
+          data: user
         });
       })
       .catch((err) => {
@@ -81,21 +81,26 @@ module.exports.updateAvatar = (req, res) => {
     });
 };
 
-module.exports.login = (req, res, next) => {
-  const { email, password } = req.body;
-  return User.findUserByCredentials(email, password)
-    .then((user) => {
-      const token = jwt.sign(
-        { _id: user._id },
-        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
-        {
+module.exports.login = async (req, res, next) => {
+  const { email, password } = req.body
+  try {
+      const user = await User.findOne({ email }) // Find the user by email
+      if (!user) {
+          return res.status(401).send({ message: 'Usuario incorrectos' })
+      }
+
+      const isPasswordValid = await bcrypt.compare(password, user.password)
+      if (!isPasswordValid) {
+          return res.status(401).send({ message: 'Contraseña incorrectos' })
+      }
+
+      const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
           expiresIn: '7d',
-        },
-      );
-      res.send({ token });
-    })
-    .catch(() => {
-      res.status(401).send({ message: 'Usuario o contraseña incorrectos' });
-    })
-    .catch(next);
-};
+      })
+      res.send({ token })
+  } catch (err) {
+      console.log(err)
+      console.log('JWT_SECRET:', JWT_SECRET)
+      res.status(500).send({ message: 'Algo salió mal' })
+  }
+}
