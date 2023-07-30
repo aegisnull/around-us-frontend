@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
-const { NODE_ENV, JWT_SECRET } = process.env;
+const { JWT_SECRET } = process.env;
 
 module.exports.getUsers = async (req, res) => {
   try {
@@ -82,25 +82,25 @@ module.exports.updateAvatar = (req, res) => {
 };
 
 module.exports.login = async (req, res, next) => {
-  const { email, password } = req.body
+  const { email, password } = req.body;
   try {
-      const user = await User.findOne({ email }) // Find the user by email
-      if (!user) {
-          return res.status(401).send({ message: 'Usuario incorrectos' })
-      }
+    const user = await User.findOne({ email }); // Find the user by email
+    if (!user) {
+      return res.status(401).send({ message: 'Usuario incorrectos' });
+    }
 
-      const isPasswordValid = await bcrypt.compare(password, user.password)
-      if (!isPasswordValid) {
-          return res.status(401).send({ message: 'Contraseña incorrectos' })
-      }
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).send({ message: 'Contraseña incorrectos' });
+    }
 
-      const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
-          expiresIn: '7d',
-      })
-      res.send({ token })
+    const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
+      expiresIn: '7d'
+    });
+    res.send({ token });
   } catch (err) {
-      console.log(err)
-      console.log('JWT_SECRET:', JWT_SECRET)
-      res.status(500).send({ message: 'Algo salió mal' })
+    console.log(err);
+    console.log('JWT_SECRET:', JWT_SECRET);
+    res.status(500).send({ message: 'Algo salió mal' });
   }
-}
+};

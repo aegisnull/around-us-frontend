@@ -14,10 +14,16 @@ app.options('*', cors()); // habilitar las solicitudes de todas las rutas
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-moongose
-  .connect('mongodb://localhost:27017/aroundb')
-  .then(() => console.log('Conectado a la base de datos'))
-  .catch((err) => console.log(err));
+// Database connection function to MongoDB Atlas cluster using mongoose
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.DATABASE_URL);
+    console.log('Connected to MongoDB');
+  } catch (error) {
+    console.log('Failed to connect to MongoDB', error);
+    process.exit(1); // Exit the application on connection error
+  }
+};
 
 const usersRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
@@ -30,8 +36,11 @@ app.use('/', (req, res) => {
   res.status(404).send({ message: 'Recurso solicitado no encontrado' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
+// Port number for the server to listen on
+const { PORT } = process.env;
+const server = app.listen(PORT, () => {
+  console.log(`Server is running at port ${PORT}`);
+  connectDB();
 });
 
 app.get('/crash-test', () => {
@@ -44,3 +53,5 @@ const { login, createUser } = require('./controllers/users');
 
 app.post('/signin', login);
 app.post('/signup', createUser);
+
+module.exports = { app, server };
